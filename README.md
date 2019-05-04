@@ -3,6 +3,9 @@
 This directory contains `Dockerfile` to make it easy to get up and running with
 Keras via [Docker](http://www.docker.com/).
 
+This runs well on ubuntu 18.04
+Edit the Dockerfile to change the username and uid
+
 ## Installing Docker
 
 General installation instructions are
