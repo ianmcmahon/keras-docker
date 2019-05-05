@@ -30,6 +30,7 @@ ENV NB_UID 1000
 
 RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER && \
     chown $NB_USER $CONDA_DIR -R && \
+    chown $NB_USER /home/$NB_USER -R && \
     mkdir -p /src && \
     chown $NB_USER /src
 
@@ -43,6 +44,11 @@ RUN conda install -y python=${python_version} && \
     pip install \
       sklearn_pandas \
       tensorflow-gpu==1.12.2 \
+      opencv-python-headless \
+      tensorlayer \
+      nltk \
+      tqdm \
+      utils \
       cntk-gpu && \
     conda install \
       bcolz \
@@ -65,8 +71,8 @@ RUN conda install -y python=${python_version} && \
     pip install git+git://github.com/keras-team/keras.git && \
     conda clean -yt
 
-ADD theanorc /home/ian/.theanorc
-ADD jupyter_notebook_config.json /home/ian/.jupyter/jupyter_notebook_config.json
+ADD theanorc /home/$NB_USER/.theanorc
+ADD jupyter_notebook_config.json /home/$NB_USER/.jupyter/jupyter_notebook_config.json
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
